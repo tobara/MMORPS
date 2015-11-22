@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tim and Joe's Game!!</title>
+  </head>
+
+  <body>
+    <h1>MMORPS</h1>
+    <% unless @player_hand == nil %>
+      <% if @winner == 0 %>
+        You chose <%= @player_hand %>, computer chose <%= @computer_hand %>. Tie, no winner.
+      <% elsif @winner == 1 %>
+        You chose <%= @player_hand %>, computer chose <%= @computer_hand %>. Human scores.
+      <% elsif @winner == 2 %>
+        You chose <%= @player_hand %>, computer chose <%= @computer_hand %>. Computer scores.
+      <% end %>
+    <% end%>
+
+    <table style="width:30%">
+      <tr>
+        <td>Player</td>
+        <td>Score</td>
+      </tr>
+      <tr>
+        <td>Human</td>
+        <td><%= @player_score %> </td>
+      </tr>
+      <tr>
+        <td>Computer</td>
+        <td><%= @computer_score %> </td>
+      </tr>
+    </table>
+
+    <% if @game_status == 'continue' || @game_status == nil %>
+      <br></br>
+      Choose!
+      <br></br>
+      <form action="/" method="post">
+        <input type="submit" value="Rock" name="rock"> <input type="submit" value="Paper" name="paper"> <input type="submit" value="Scissors" name="scissors">
+      </form>
+    <% elsif @game_status == 'player' %>
+      Player wins
+    <a href="/reset">Play again!</a>
+    <% elsif @game_status == 'computer' %>
+      Computer wins!
+    <a href="/reset">Play again!</a>
+    <% end %>
+  </body>
+</html>
